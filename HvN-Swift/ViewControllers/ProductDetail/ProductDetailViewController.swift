@@ -20,6 +20,7 @@ class ProductDetailViewController: BaseViewController, UITableViewDelegate, UITa
     var datasources = [Review]()
     var users = [User]()
     var allReviews = [Review]()
+    var reviews = [Review]()
     var localReview = [Review]()
     
     override func viewDidLoad() {
@@ -47,46 +48,28 @@ class ProductDetailViewController: BaseViewController, UITableViewDelegate, UITa
         
     }
     func filterReviewDatasources() {
-        if let product = self.product {
-            var result = [Review]()
-            
-            for review in localReview {
-                for  user in users {
-                    if review.userId ==  user.userId && review.productId ==  product.productId {
-                        review.userName = user.userName
-                        result.insert(review, atIndex: 0)
-                    }
-                }
-            }
-            for review in allReviews {
-                for user in users {
-                    if review.userId ==  user.userId && review.productId ==  product.productId {
-                        review.userName = user.userName
-                        result.append(review)
-                    }
-                }
-            }
-            self.datasources = result
-            self.totalReviewsLabel.text = String(format: "Reviews (%d)", result.count)
-
-        }
+        self.totalReviewsLabel.text = String(format: "Reviews (%d)", datasources.count)
     }
     func initData() {
-        self.showLoading()
-        APIManager.sharedInstance().getUsers { (success : Bool, data :AnyObject?, error : NSError?) -> () in
-            self.hideLoading()
-            if let allUsers = data as? [User] {
-                self.users = allUsers
-                self.filterReviewDatasources()
-                self.tableView.reloadData()
-                
-            }else {
-                if let myError = error {
-                    Utils.showAlertWithMessage(myError.localizedDescription)
+        if let product = self.product {
+            self.showLoading()
+            APIManager.sharedInstance().getReviewOfProduct(product.productId) { (success, data, error) in
+                self.hideLoading()
+                if success == true {
+                    if let reviews = data as? [Review] {
+                        self.datasources = reviews
+                        self.filterReviewDatasources()
+                        self.tableView.reloadData()
+                    }
                 }else {
-                    Utils.showAlertWithMessage(StringContents.ErrorMessage.kUnexpectedError)
+                    if let myError = error {
+                        Utils.showAlertWithMessage(myError.localizedDescription)
+                    }else {
+                        Utils.showAlertWithMessage(StringContents.ErrorMessage.kUnexpectedError)
+                    }
                 }
             }
+        
         }
     }
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
@@ -94,7 +77,7 @@ class ProductDetailViewController: BaseViewController, UITableViewDelegate, UITa
     }
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("ReviewTableViewCell", forIndexPath: indexPath) as! ReviewTableViewCell
-        cell.fillUIWithReview(datasources[indexPath.row])
+        cell.fillUIWithReview(datasources[indexPath.row], users: users)
         return cell
     }
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

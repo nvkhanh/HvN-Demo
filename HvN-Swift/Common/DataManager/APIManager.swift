@@ -42,6 +42,8 @@ class APIManager: NSObject {
     func addReviews(comment: String, rating : NSNumber,  productId : String, userId : String, completion : CompletionBlock)  {
         APIManager.sharedInstance().reviewService.addReviews(comment, rating: rating, productId: productId, userId: userId, completion: completion)
     }
-    
+    func getReviewOfProduct(productId : String, completion : CompletionBlock) {
+        APIManager.sharedInstance().reviewService.getReviewOfProduct(productId, completion: completion)
+    }
 
 }

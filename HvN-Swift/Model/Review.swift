@@ -15,7 +15,7 @@ class Review: BaseModel {
     var productId = ""
     var rating = NSNumber(int: 0)
     var updatedAt : NSDate?
-    var userName = ""
+    var userName : String?
     
     override func mapping(map: Map) {
         reviewId <- map["objectId"]
@@ -62,6 +62,16 @@ class Review: BaseModel {
         return result
     }
     
-    
+    func updateUserName(users : [User]) {
+        if self.userName == nil {
+            for value in users {
+                if value.userId == self.userId {
+                    self.userName = value.userName
+                    break
+                }
+            }
+            
+        }
+    }
     
 }

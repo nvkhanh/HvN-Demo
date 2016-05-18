@@ -30,6 +30,7 @@ class ReviewService: BaseService {
         }
         
     }
+    
     func addReviews(comment: String, rating : NSNumber,  productId : String, userId : String, completion : CompletionBlock)  {
         var params = NSMutableDictionary()
         let productDict = ["__type" : "Pointer", "className" : "Product", "objectId" : productId]
@@ -54,5 +55,40 @@ class ReviewService: BaseService {
         }
         
     }
+    
+    func getReviewOfProduct(productId : String, completion : CompletionBlock) {
+        
+        let dict = ["productID" : ["$inQuery" :["where" : ["objectId" :productId],"className": "Product"]]];
+        var queryUrl = Constants.URL.kPostReview
+        queryUrl += "?where="
+        queryUrl += Utils.convertDictionaryToString(dict)
+        
+        if let encodedURL = queryUrl.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet()) {
+            
+            self.callAPI(encodedURL, params: nil, method: Constants.Method.kGETMethod) { (success : Bool, responseObject : AnyObject?, error : NSError?) in
+                if success == true {
+                    if let jsonResult = responseObject as? Dictionary<String, AnyObject> {
+                        if let array = jsonResult["results"] as? [AnyObject] {
+                            let result = Review.getListFromArrary(array)
+                            completion(success: true, data: result, error: nil)
+                        }else {
+                            completion(success: false, data: nil, error: NSError(domain: "", code: Constants.Config.kDefaultErrorCode, userInfo: nil))
+                        }
+                        
+                    }else {
+                        completion(success: false, data: nil, error: NSError(domain: "", code: Constants.Config.kDefaultErrorCode, userInfo: nil))
+                    }
+                }else {
+                    completion(success: false , data: nil, error: error)
+                }
+            }
+            
+        }else {
+            completion(success: false, data: nil, error: NSError(domain: "", code: Constants.Config.kDefaultErrorCode, userInfo: nil))
+        }
+        
+    }
+    
+
 
 }

@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "1B52A9758580951DA15E501F27DF9ED41B40450F",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "1B52A9758580951DA15E501F27DF9ED41B40450F" : 0,
+    "9049ED97C73A52F02394D5EE2BF24C85991FA066" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "DFD1BAAE-569E-4BC1-952C-AA9DDDC61D8C",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "1B52A9758580951DA15E501F27DF9ED41B40450F" : "HvN-Demo\/",
+    "9049ED97C73A52F02394D5EE2BF24C85991FA066" : "HvN-Swift"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "HvN-Swift",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "HvN-Swift.xcworkspace",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/nvkhanh\/HvN-Demo.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "1B52A9758580951DA15E501F27DF9ED41B40450F"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/nvkhanh\/HvN-Swift.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "9049ED97C73A52F02394D5EE2BF24C85991FA066"
+    }
+  ]
+}

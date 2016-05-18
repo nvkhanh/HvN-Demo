@@ -16,6 +16,7 @@ class ReviewTableViewCell: UITableViewCell {
     @IBOutlet weak var commentLabel : UILabel!
     @IBOutlet weak var ratingView : CosmosView!
     @IBOutlet weak var containerView : UIView!
+
     var review : Review?
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -28,9 +29,10 @@ class ReviewTableViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
         // Configure the view for the selected state
     }
-    func fillUIWithReview(review : Review) {
+    func fillUIWithReview(review : Review, users : [User]) {
         self.review = review
         if let review = self.review {
+            review.updateUserName(users)
             userNameLabel.text = review.userName
             
             commentLabel.text = review.comment

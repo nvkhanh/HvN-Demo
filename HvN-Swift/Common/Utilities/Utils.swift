@@ -38,4 +38,15 @@ class Utils: NSObject {
         let alert = UIAlertView(title: "", message: message, delegate: self, cancelButtonTitle: "OK")
         alert.show()
     }
+    class func convertDictionaryToString(dict : NSDictionary) -> String {
+        var result : NSString = ""
+        do {
+            let arrJson = try NSJSONSerialization.dataWithJSONObject(dict, options: [])
+            let string = NSString(data: arrJson, encoding: NSUTF8StringEncoding)
+            result = string! as NSString
+        }catch let error as NSError{
+            print(error.description)
+        }
+        return result as String
+    }
 }

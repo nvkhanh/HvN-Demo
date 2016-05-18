@@ -62,6 +62,7 @@ class Product: BaseModel {
             for value in brands {
                 if value.brandId == self.brandId {
                     self.brandName = value.brandName
+                    break
                 }
             }
             

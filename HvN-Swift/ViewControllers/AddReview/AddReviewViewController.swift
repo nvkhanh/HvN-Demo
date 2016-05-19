@@ -220,12 +220,9 @@ class AddReviewViewController: BaseViewController, ZBarReaderDelegate, MLPAutoCo
     
     func updateMatchedProduct(productId : String) {
         var found = false
-        for value in products {
-            if value.productId == productId {
-                self.productNameLabel.text = value.productName
-                found = true
-                break
-            }
+        for value in products where value.productId == productId{
+            self.productNameLabel.text = value.productName
+            found = true
         }
         if found == false {
             Utils.showAlertWithMessage(StringContents.MessageValidate.kProductNotFound)

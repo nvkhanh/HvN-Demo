@@ -63,7 +63,6 @@ class ProductsViewController: BaseViewController, UITableViewDelegate, UITableVi
             self.totalPendingRequest -= 1
             if success == true {
                 if let value = data as? [Product] {
-                    self.datasource = value
                     self.allProducts = value
                     self.filterDatasourceBySelectedBrand()
                 }
@@ -134,14 +133,9 @@ class ProductsViewController: BaseViewController, UITableViewDelegate, UITableVi
     }
     
     func filterDatasourceBySelectedBrand() {
-        var result = [Product]()
-        for value in datasource {
-            if let brand = selectedBrand {
-                if value.brandId == brand.brandId {
-                    result.append(value)
-                }
-            }
+        if let brand = selectedBrand {
+            self.datasource = allProducts.filter({$0.brandId == brand.brandId})
         }
-        self.datasource = result
+        
     }
 }

@@ -13,24 +13,24 @@ import MBProgressHUD
 extension UIViewController {
     
     func rootView() -> UIViewController? {
-        let appDelegate  = UIApplication.sharedApplication().delegate as! AppDelegate
-        let viewController = appDelegate.window!.rootViewController!
-        return viewController
+        if let appDelegate  = UIApplication.sharedApplication().delegate as? AppDelegate {
+            let viewController = appDelegate.window!.rootViewController!
+            return viewController
+        }
+        return nil
     }
     
     func showLoading() {
-        let viewController = self.rootView()
-        if viewController != nil {
-            let loadingNotification = MBProgressHUD.showHUDAddedTo(viewController!.view, animated: true)
+        if let viewController = self.rootView() {
+            let loadingNotification = MBProgressHUD.showHUDAddedTo(viewController.view, animated: true)
             loadingNotification.mode = MBProgressHUDMode.Indeterminate
             loadingNotification.labelText = "Loading"
         }
     }
     
     func hideLoading() {
-        let viewController = self.rootView()
-        if viewController != nil {
-            MBProgressHUD.hideAllHUDsForView(viewController!.view, animated: true)
+        if let viewController = self.rootView() {
+            MBProgressHUD.hideAllHUDsForView(viewController.view, animated: true)
         }
     }
 }

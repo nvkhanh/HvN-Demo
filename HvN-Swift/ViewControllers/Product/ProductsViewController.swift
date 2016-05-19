@@ -58,6 +58,7 @@ class ProductsViewController: BaseViewController, UITableViewDelegate, UITableVi
     
     func initData() {
         self.showLoading()
+        
         APIManager.sharedInstance().getProducts { (success : Bool, data : AnyObject?, error : NSError?) -> () in
             self.totalPendingRequest -= 1
             if success == true {
@@ -75,6 +76,7 @@ class ProductsViewController: BaseViewController, UITableViewDelegate, UITableVi
             }
             self.reloadDataIfNeed()
         }
+        
         APIManager.sharedInstance().getBrands { (success : Bool, data : AnyObject?, error : NSError?) -> () in
             self.totalPendingRequest -= 1
             if success == true {
@@ -91,6 +93,7 @@ class ProductsViewController: BaseViewController, UITableViewDelegate, UITableVi
             }
             self.reloadDataIfNeed()
         }
+        
         APIManager.sharedInstance().getReviews { (success : Bool, data : AnyObject?, error : NSError?) -> () in
             self.totalPendingRequest -= 1
             if success == true {
@@ -107,6 +110,7 @@ class ProductsViewController: BaseViewController, UITableViewDelegate, UITableVi
             }
             self.reloadDataIfNeed()
         }
+        
         APIManager.sharedInstance().getUsers { (success : Bool, data :AnyObject?, error : NSError?) -> () in
             if success == true {
                 if let allUsers = data as? [User] {

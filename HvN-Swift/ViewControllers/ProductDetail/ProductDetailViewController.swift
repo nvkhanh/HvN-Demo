@@ -28,7 +28,7 @@ class ProductDetailViewController: BaseViewController, UITableViewDelegate, UITa
         // Do any additional setup after loading the view.
         
         self.setUpUI()
-        self.initData()
+        self.getReviewDatasources()
     }
     
     func setUpUI() {
@@ -42,11 +42,16 @@ class ProductDetailViewController: BaseViewController, UITableViewDelegate, UITa
         
     }
     
-    func filterReviewDatasources() {
+    func updateReviewDatasources() {
+        for review in datasources {
+            if let index = users.indexOf({$0.userId == review.userId}){
+                review.userName = users[index].userName
+            }
+        }
         self.totalReviewsLabel.text = String(format: "Reviews (%d)", datasources.count)
     }
     
-    func initData() {
+    func getReviewDatasources() {
         if let product = self.product {
             self.showLoading()
             APIManager.sharedInstance().getReviewOfProduct(product.productId) { (success, data, error) in
@@ -54,10 +59,10 @@ class ProductDetailViewController: BaseViewController, UITableViewDelegate, UITa
                 if success == true {
                     if let reviews = data as? [Review] {
                         self.datasources = reviews
-                        self.filterReviewDatasources()
+                        self.updateReviewDatasources()
                         self.tableView.reloadData()
                     }
-                }else {
+                } else {
                     if let myError = error {
                         Utils.showAlertWithMessage(myError.localizedDescription)
                     }else {
@@ -65,9 +70,9 @@ class ProductDetailViewController: BaseViewController, UITableViewDelegate, UITa
                     }
                 }
             }
-        
         }
     }
+    
     //MARK: -- TableView Methods
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         return ReviewTableViewCell.getHeightWithComment(datasources[indexPath.row].comment)

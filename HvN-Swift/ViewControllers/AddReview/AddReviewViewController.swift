@@ -69,7 +69,7 @@ class AddReviewViewController: BaseViewController, ZBarReaderDelegate, MLPAutoCo
             let user = self.findMatchedUser(emailTextField.text!)
             if  user == nil {
                 Utils.showAlertWithMessage(StringContents.MessageValidate.kUserNotFound)
-            }else {
+            } else {
                 self.showLoading()
                 APIManager.sharedInstance().addReviews(commentTextView.text!, rating: NSNumber(float: Float(self.rating)), productId: self.productIdTextField.text!, userId: user!.userId) { (success : Bool, data : AnyObject?, error : NSError?)  -> () in
                     self.hideLoading()
@@ -150,7 +150,7 @@ class AddReviewViewController: BaseViewController, ZBarReaderDelegate, MLPAutoCo
         }
         
         if let viewController =  productDetailViewController {
-            productDetailViewController?.initData()
+            viewController.updateReviewDatasources()
             self.navigationController?.popToViewController(viewController, animated: true)
         }else {
             self.navigationController?.popToRootViewControllerAnimated(true)

@@ -35,15 +35,10 @@ class ReviewTableViewCell: UITableViewCell {
     func fillUIWithReview(review : Review, users : [User]) {
         self.review = review
         if let review = self.review {
-            review.updateUserName(users)
-            userNameLabel.text = review.userName
+//            review.updateUserName(users)
+            userNameLabel.text = String(format: "%@ - %@",review.userName!, Utils.convertDateToString(review.createdAt!))
             
             commentLabel.text = review.comment
-            if let createAt = review.createdAt {
-                ratingLabel.text = String(format: "%@ - Rating: %.1f", Utils.convertDateToString(createAt),review.rating.doubleValue)
-            }else {
-                ratingLabel.text =  String(format: "Rating: %.1f",review.rating.doubleValue)
-            }
             ratingView.rating = Double(review.rating.doubleValue)
         }
         
@@ -54,8 +49,10 @@ class ReviewTableViewCell: UITableViewCell {
         let titleAttributes =  [NSFontAttributeName : UIFont.systemFontOfSize(14)]
         let maxWidth = Utils.getScreenSize().width - 16 - 16
         let size = CGSize(width: maxWidth, height: CGFloat.max)
-        let titleTextSize = comment.boundingRectWithSize(size, options: NSStringDrawingOptions.UsesLineFragmentOrigin, attributes: titleAttributes, context: nil)
-        return 25 + titleTextSize.height + 4 + 4 + 17 + 10
+        let commentTextSize = comment.boundingRectWithSize(size, options: NSStringDrawingOptions.UsesLineFragmentOrigin, attributes: titleAttributes, context: nil)
+        
+        return 25 + commentTextSize.height + 4 + 4 + 17 + 10
+        
         
     }
     

@@ -74,9 +74,6 @@ class AddReviewViewController: BaseViewController, ZBarReaderDelegate, MLPAutoCo
                 APIManager.sharedInstance().addReviews(commentTextView.text!, rating: NSNumber(float: Float(self.rating)), productId: self.productIdTextField.text!, userId: user!.userId) { (success : Bool, data : AnyObject?, error : NSError?)  -> () in
                     self.hideLoading()
                     if success  {
-                        if let review = data as? Review {
-                            self.cacheLocalReview(review)
-                        }
                         self.handlerAddReviewSuccess(self.productIdTextField.text!)
                     } else {
                         Utils.showAlertWithMessage(error!.localizedDescription)
@@ -127,10 +124,6 @@ class AddReviewViewController: BaseViewController, ZBarReaderDelegate, MLPAutoCo
                 self.hideLoading()
             })
         }
-    }
-    
-    func cacheLocalReview(review : Review) {
-        
     }
     
     func handlerAddReviewSuccess(productId : String) {
@@ -214,7 +207,6 @@ class AddReviewViewController: BaseViewController, ZBarReaderDelegate, MLPAutoCo
         if found == false {
             Utils.showAlertWithMessage(StringContents.MessageValidate.kProductNotFound)
             self.productNameLabel.text = ""
-            
         }
     }
     
@@ -247,7 +239,6 @@ class AddReviewViewController: BaseViewController, ZBarReaderDelegate, MLPAutoCo
         } else if self.commentTextView.text!.lengthOfBytesUsingEncoding(NSUTF8StringEncoding) == 0 {
             message = StringContents.MessageValidate.kMissingComment
         }
-        
         return message
     }
     

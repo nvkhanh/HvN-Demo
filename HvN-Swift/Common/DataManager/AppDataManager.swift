@@ -18,6 +18,7 @@ class AppDataManager: NSObject {
         }
         return Static.instance
     }
+    
     func getAllUser(completion : CompletionBlock?) {
         APIManager.sharedInstance().getUsers { (success : Bool, data :AnyObject?, error : NSError?) -> () in
             if success == true {

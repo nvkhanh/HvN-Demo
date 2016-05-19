@@ -12,6 +12,7 @@ import AFNetworking
 
 typealias CompletionBlock = ( success : Bool, data : AnyObject?, error : NSError?) -> ()
 typealias CommonBlock = () -> ()
+
 class APIManager: NSObject {
     
     

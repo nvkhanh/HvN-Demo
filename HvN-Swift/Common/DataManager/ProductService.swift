@@ -29,6 +29,7 @@ class ProductService: BaseService {
             }
         }
     }
+    
     func getProductsByBrand(brand: Brand, completion : CompletionBlock)  {
         
         let dict = ["brandID": ["$inQuery":["where": ["objectId": brand.brandId],"className": "Brand"]]];

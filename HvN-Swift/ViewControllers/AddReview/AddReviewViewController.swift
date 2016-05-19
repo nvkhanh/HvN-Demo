@@ -60,11 +60,6 @@ class AddReviewViewController: BaseViewController, ZBarReaderDelegate, MLPAutoCo
         super.viewDidDisappear(animated)
     }
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
     @IBAction func didTouchedOnAddReViewButton() {
         self.view.endEditing(true)
         
@@ -122,7 +117,6 @@ class AddReviewViewController: BaseViewController, ZBarReaderDelegate, MLPAutoCo
             }
         }
         return result
-        
     }
     
     //MARK: -- Private Methods
@@ -141,6 +135,7 @@ class AddReviewViewController: BaseViewController, ZBarReaderDelegate, MLPAutoCo
             for value in array {
                 if let viewController = value as? ProductsViewController {
                     viewController.localReview.append(review)
+                    break
                 }
             }
             for value in array {
@@ -148,6 +143,7 @@ class AddReviewViewController: BaseViewController, ZBarReaderDelegate, MLPAutoCo
                     viewController.localReview.append(review)
                     viewController.filterReviewDatasources()
                     viewController.tableView.reloadData()
+                    break
                 }
             }
         }
@@ -162,6 +158,7 @@ class AddReviewViewController: BaseViewController, ZBarReaderDelegate, MLPAutoCo
                     if let product = viewController.product {
                         if product.productId == productId {
                             productDetailViewController = viewController
+                            break
                         }
                     }
                 }

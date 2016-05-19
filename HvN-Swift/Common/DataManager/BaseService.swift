@@ -20,7 +20,6 @@ class BaseService: NSObject {
             let jsonData:NSData = try! NSJSONSerialization.dataWithJSONObject(params!, options: .PrettyPrinted)
             request.HTTPBody = jsonData
         }
-        
         request.addValue(Constants.Config.kHttpFieldContentTypeValue, forHTTPHeaderField: Constants.Config.kHttpFieldContentTypeKey)
         request.addValue(Constants.Config.kHttpFieldAcceptValue, forHTTPHeaderField:Constants.Config.kHttpFieldAcceptKey)
         request.addValue(Constants.Config.kParseApplicationIdValue, forHTTPHeaderField: Constants.Config.kParseApplicationIdKey)

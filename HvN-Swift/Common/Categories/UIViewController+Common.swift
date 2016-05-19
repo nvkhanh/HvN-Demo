@@ -16,7 +16,6 @@ extension UIViewController {
         let appDelegate  = UIApplication.sharedApplication().delegate as! AppDelegate
         let viewController = appDelegate.window!.rootViewController!
         return viewController
-        
     }
     
     func showLoading() {

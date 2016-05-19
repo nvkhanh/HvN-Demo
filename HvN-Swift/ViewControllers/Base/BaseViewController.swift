@@ -16,12 +16,7 @@ class BaseViewController: UIViewController {
         // Do any additional setup after loading the view.
         self.createRightBarButtonWithTitle("Add Review")
     }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
+
     func createRightBarButtonWithTitle(title : String){
         let barButton = UIBarButtonItem(title: title, style: UIBarButtonItemStyle.Plain, target: self, action: #selector(didTouchedOnRightBarButton))
         self.navigationItem.rightBarButtonItem = barButton

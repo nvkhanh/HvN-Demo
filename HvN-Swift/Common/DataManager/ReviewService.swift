@@ -32,9 +32,9 @@ class ReviewService: BaseService {
     
     func addReviews(comment: String, rating : NSNumber,  productId : String, userId : String, completion : CompletionBlock)  {
         var params = NSMutableDictionary()
-        let productDict = ["__type" : "Pointer", "className" : "Product", "objectId" : productId]
-        let userDict = ["__type" : "Pointer", "className" : "User", "objectId" : userId]
-        params = ["comment" : comment, "productID" : productDict, "userID" : userDict, "rating" : rating]
+        let productDict = ["__type": "Pointer", "className": "Product", "objectId" : productId]
+        let userDict = ["__type": "Pointer", "className" : "User", "objectId" : userId]
+        params = ["comment": comment, "productID": productDict, "userID": userDict, "rating": rating]
         
         self.callAPI(Constants.URL.kPostReview, params: params, method: Constants.Method.kPOSTMethod) { (success : Bool, responseObject : AnyObject?, error : NSError?) in
             if success == true {
@@ -56,7 +56,7 @@ class ReviewService: BaseService {
     }
     
     func getReviewOfProduct(productId : String, completion : CompletionBlock) {
-        let dict = ["productID" : ["$inQuery" :["where" : ["objectId" :productId],"className": "Product"]]];
+        let dict = ["productID": ["$inQuery":["where": ["objectId": productId],"className": "Product"]]];
         var queryUrl = Constants.URL.kPostReview
         queryUrl += "?where="
         queryUrl += Utils.convertDictionaryToString(dict)

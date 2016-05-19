@@ -32,11 +32,6 @@ class ProductDetailViewController: BaseViewController, UITableViewDelegate, UITa
         self.initData()
     }
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
     func setUpUI() {
         
         if let product = self.product {

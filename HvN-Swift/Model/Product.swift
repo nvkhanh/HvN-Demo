@@ -75,7 +75,6 @@ class Product: BaseModel {
                 if value.productId == self.productId {
                     count += 1
                     total += value.rating.doubleValue
-                    print(value.rating.doubleValue)
                 }
             }
             if count  != 0 {

@@ -80,7 +80,7 @@ class ProductDetailViewController: BaseViewController, UITableViewDelegate, UITa
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("ReviewTableViewCell", forIndexPath: indexPath) as! ReviewTableViewCell
-        cell.fillUIWithReview(datasources[indexPath.row], users: users)
+        cell.fillUIWithReview(datasources[indexPath.row], users: AppDataManager.sharedInstance().users)
         return cell
     }
     

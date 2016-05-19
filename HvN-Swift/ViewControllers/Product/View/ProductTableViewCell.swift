@@ -29,25 +29,41 @@ class ProductTableViewCell: UITableViewCell {
         
         // Configure the view for the selected state
     }
-    func reloadViewWithData(data : Product, reviews: [Review], brands: [Brand]) {
+    
+    func updateRating() {
+        if let rating = self.product?.rating {
+            ratingLabel.text = String(format: "Rating: %.2f",rating.doubleValue)
+            ratingView.rating = Double(rating.floatValue)
+        } else {
+            self.ratingLabel.text = ""
+            self.ratingView.rating = Double(0)
+            
+        }
+    }
+    
+    func reloadViewWithData(data : Product, brand: Brand) {
         self.product = data
         if let product = self.product {
             productNameLabel.text = product.productName
-            product.updateBrandName(brands)
+            product.brandName = brand.brandName
             
             brandLabel.text = product.brandName
             
-            product.updateRatingWithReviews(reviews)
-            
             if let rating = product.rating {
-                ratingLabel.text = String(format: "Rating: %.2f",rating.doubleValue)
-                ratingView.rating = Double(rating.floatValue)
+                self.updateRating()
             }else {
-                ratingLabel.text = ""
-                ratingView.rating = Double(0)
+                APIManager.sharedInstance().getReviewOfProduct(data.productId, completion: { (success, data, error) in
+                    if let reviews = data as? [Review] {
+                        product.updateRatingWithReviews(reviews)
+                        self.updateRating()
+                    }else {
+                       self.updateRating()
+                    }
+                })
             }
         
         }
+        
     }
     
 }

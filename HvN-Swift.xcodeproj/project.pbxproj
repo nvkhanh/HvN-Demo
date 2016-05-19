@@ -24,6 +24,7 @@
 		84A04CCF1CE0E9E10081F7C3 /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A04CCE1CE0E9E10081F7C3 /* APIManager.swift */; };
 		84B38C181CE23B20005F4B66 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B38C171CE23B20005F4B66 /* Utils.swift */; };
 		84B38C271CE2539C005F4B66 /* images.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 84B38C261CE2539C005F4B66 /* images.jpeg */; };
+		D0142CA71CEDB44200790266 /* AppDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0142CA61CEDB44200790266 /* AppDataManager.swift */; };
 		D06DBAD11CEB181400718FF2 /* AddReviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06DBAC31CEB181400718FF2 /* AddReviewViewController.swift */; };
 		D06DBAD21CEB181400718FF2 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06DBAC61CEB181400718FF2 /* BaseViewController.swift */; };
 		D06DBAD31CEB181400718FF2 /* SuggestionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06DBAC81CEB181400718FF2 /* SuggestionViewController.swift */; };
@@ -77,6 +78,7 @@
 		84A04CCE1CE0E9E10081F7C3 /* APIManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
 		84B38C171CE23B20005F4B66 /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		84B38C261CE2539C005F4B66 /* images.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = images.jpeg; sourceTree = "<group>"; };
+		D0142CA61CEDB44200790266 /* AppDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDataManager.swift; sourceTree = "<group>"; };
 		D06DBAC31CEB181400718FF2 /* AddReviewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddReviewViewController.swift; sourceTree = "<group>"; };
 		D06DBAC61CEB181400718FF2 /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		D06DBAC81CEB181400718FF2 /* SuggestionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SuggestionViewController.swift; sourceTree = "<group>"; };
@@ -221,6 +223,7 @@
 				D0FC597E1CEAF28800FA97A6 /* UserService.swift */,
 				D0FC59801CEAF29300FA97A6 /* ReviewService.swift */,
 				D0FC59821CEAF2A000FA97A6 /* ProductService.swift */,
+				D0142CA61CEDB44200790266 /* AppDataManager.swift */,
 			);
 			path = DataManager;
 			sourceTree = "<group>";
@@ -495,6 +498,7 @@
 				D06DBAD51CEB181400718FF2 /* ProductTableViewCell.swift in Sources */,
 				D0FC59791CEAED4900FA97A6 /* StringContents.swift in Sources */,
 				84A04CCC1CE0D4660081F7C3 /* Brand.swift in Sources */,
+				D0142CA71CEDB44200790266 /* AppDataManager.swift in Sources */,
 				D06DBAD11CEB181400718FF2 /* AddReviewViewController.swift in Sources */,
 				D06DBAD21CEB181400718FF2 /* BaseViewController.swift in Sources */,
 				D06DBAD61CEB181400718FF2 /* ProductDetailViewController.swift in Sources */,

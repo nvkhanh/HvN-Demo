@@ -61,11 +61,9 @@ class Product: BaseModel {
     
     func updateBrandName(brands : [Brand]) {
         if self.brandName == nil {
-            
             if let index = brands.indexOf({$0.brandId == self.brandId}){
                 self.brandName = brands[index].brandName
             }
-            
         }
     }
     
@@ -76,7 +74,7 @@ class Product: BaseModel {
             for value in reviews {
                 if value.productId == self.productId {
                     count += 1
-                    total = Float(total) +  value.rating.floatValue
+                    total += value.rating.floatValue
                 }
             }
             if count  != 0 {

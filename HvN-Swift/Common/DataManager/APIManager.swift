@@ -50,5 +50,9 @@ class APIManager: NSObject {
     func getReviewOfProduct(productId : String, completion : CompletionBlock) {
         APIManager.sharedInstance().reviewService.getReviewOfProduct(productId, completion: completion)
     }
+    
+    func getProductsByBrand(brand: Brand, completion : CompletionBlock)  {
+        APIManager.sharedInstance().productService.getProductsByBrand(brand, completion: completion)
+    }
 
 }

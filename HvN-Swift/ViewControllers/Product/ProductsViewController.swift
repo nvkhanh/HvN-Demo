@@ -14,12 +14,12 @@ class ProductsViewController: BaseViewController, UITableViewDelegate, UITableVi
     var allProducts = [Product]()
     private var datasource = [Product]()
     private var reviews = [Review]()
-    private var brands = [Brand]()
+    var brands = [Brand]()
     private var users = [User]()
     var selectedBrand : Brand?
     var localReview = [Review]()
     @IBOutlet weak var tableView : UITableView!
-    private var totalPendingRequest = 4
+    private var totalPendingRequest = 1
     private var filterMode = false
     
     override func viewDidLoad() {
@@ -33,7 +33,9 @@ class ProductsViewController: BaseViewController, UITableViewDelegate, UITableVi
     //MARK: -- TableView Method
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("ProductTableViewCell", forIndexPath: indexPath) as! ProductTableViewCell
-        cell.reloadViewWithData(datasource[indexPath.row], reviews: reviews, brands: brands)
+        if let brand = selectedBrand {
+            cell.reloadViewWithData(datasource[indexPath.row], brand: brand)
+        }
         return cell
     }
     
@@ -53,92 +55,34 @@ class ProductsViewController: BaseViewController, UITableViewDelegate, UITableVi
     //MARK: -- Private Method
     func setUpUI() {
         self.title = "Product List"
-        
     }
     
     func initData() {
-        self.showLoading()
         
-        APIManager.sharedInstance().getProducts { (success : Bool, data : AnyObject?, error : NSError?) -> () in
-            self.totalPendingRequest -= 1
-            if success == true {
-                if let value = data as? [Product] {
-                    self.allProducts = value
-                    self.filterDatasourceBySelectedBrand()
-                }
-            }else {
-                if let myError = error {
-                    Utils.showAlertWithMessage(myError.localizedDescription)
-                }else {
-                    Utils.showAlertWithMessage(StringContents.ErrorMessage.kUnexpectedError)
-                }
-                
-            }
-            self.reloadDataIfNeed()
-        }
-        
-        APIManager.sharedInstance().getBrands { (success : Bool, data : AnyObject?, error : NSError?) -> () in
-            self.totalPendingRequest -= 1
-            if success == true {
-                if let value = data as? [Brand] {
-                    self.brands = value
-                }
-            }else {
-                if let myError = error {
-                    Utils.showAlertWithMessage(myError.localizedDescription)
-                }else {
-                    Utils.showAlertWithMessage(StringContents.ErrorMessage.kUnexpectedError)
-                }
-
-            }
-            self.reloadDataIfNeed()
-        }
-        
-        APIManager.sharedInstance().getReviews { (success : Bool, data : AnyObject?, error : NSError?) -> () in
-            self.totalPendingRequest -= 1
-            if success == true {
-                if let value = data as? [Review] {
-                    self.reviews = value
-                }
-            }else {
-                if let myError = error {
-                    Utils.showAlertWithMessage(myError.localizedDescription)
-                }else {
-                    Utils.showAlertWithMessage(StringContents.ErrorMessage.kUnexpectedError)
-                }
-
-            }
-            self.reloadDataIfNeed()
-        }
-        
-        APIManager.sharedInstance().getUsers { (success : Bool, data :AnyObject?, error : NSError?) -> () in
-            if success == true {
-                if let allUsers = data as? [User] {
-                    self.users = allUsers
-                }
-            }else {
-                if let myError = error {
-                    Utils.showAlertWithMessage(myError.localizedDescription)
-                }else {
-                    Utils.showAlertWithMessage(StringContents.ErrorMessage.kUnexpectedError)
-                }
-            }
-            self.totalPendingRequest -= 1
-            self.reloadDataIfNeed()
-        }
-    }
-    
-    func reloadDataIfNeed() {
-        if totalPendingRequest == 0 {
-            tableView.reloadData()
-            self.hideLoading()
-        }
-    }
-    
-    func filterDatasourceBySelectedBrand() {
         if let brand = selectedBrand {
-            self.datasource = allProducts.filter({$0.brandId == brand.brandId})
+            self.showLoading()
+            APIManager.sharedInstance().getProductsByBrand(brand) { (success, data, error) in
+                self.totalPendingRequest -= 1
+                self.hideLoading()
+                if success == true {
+                    if let value = data as? [Product] {
+                        self.datasource = value
+                        self.tableView.reloadData()
+                    }
+                }else {
+                    if let myError = error {
+                        Utils.showAlertWithMessage(myError.localizedDescription)
+                    }else {
+                        Utils.showAlertWithMessage(StringContents.ErrorMessage.kUnexpectedError)
+                    }
+                    
+                }
+            }
         }
         
     }
+    
+
+    
+    
 }

@@ -32,12 +32,14 @@ class ReviewTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
-    func fillUIWithReview(review : Review, users : [User]) {
+    func fillUIWithReview(review : Review, users : [User]?) {
         self.review = review
         if let review = self.review {
-//            review.updateUserName(users)
-            userNameLabel.text = String(format: "%@ - %@",review.userName!, Utils.convertDateToString(review.createdAt!))
-            
+            if let arrayUsers = users {
+                review.updateUserName(arrayUsers)
+                userNameLabel.text = String(format: "%@ - %@",review.userName!, Utils.convertDateToString(review.createdAt!))
+            }
+            ratingLabel.text = String(format: "Rating: %@",review.rating)
             commentLabel.text = review.comment
             ratingView.rating = Double(review.rating.doubleValue)
         }

@@ -61,12 +61,11 @@ class Product: BaseModel {
     
     func updateBrandName(brands : [Brand]) {
         if self.brandName == nil {
-            for value in brands {
-                if value.brandId == self.brandId {
-                    self.brandName = value.brandName
-                    break
-                }
+            
+            if let index = brands.indexOf({$0.brandId == self.brandId}){
+                self.brandName = brands[index].brandName
             }
+            
         }
     }
     

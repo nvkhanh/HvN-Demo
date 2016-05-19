@@ -13,11 +13,8 @@ class ProductsViewController: BaseViewController, UITableViewDelegate, UITableVi
     
     var allProducts = [Product]()
     private var datasource = [Product]()
-    private var reviews = [Review]()
     var brands = [Brand]()
-    private var users = [User]()
     var selectedBrand : Brand?
-    var localReview = [Review]()
     @IBOutlet weak var tableView : UITableView!
     private var totalPendingRequest = 1
     private var filterMode = false
@@ -46,8 +43,6 @@ class ProductsViewController: BaseViewController, UITableViewDelegate, UITableVi
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         if let productDetailViewController = Utils.loadViewController("ProductDetailViewController", storyBoard: "Main") as? ProductDetailViewController {
             productDetailViewController.product = datasource[indexPath.row]
-            productDetailViewController.allReviews = self.reviews
-            productDetailViewController.users = self.users
             self.navigationController?.pushViewController(productDetailViewController, animated: true)
         }
     }

@@ -23,7 +23,6 @@ class SuggestionViewController: BaseViewController , UITableViewDataSource, UITa
         super.viewDidLoad()
         
         self.getAllBrands()
-//        self.getAllRevies()
         self.setAllUser()
         self.title = "Brand List"
     }
@@ -49,23 +48,6 @@ class SuggestionViewController: BaseViewController , UITableViewDataSource, UITa
         }
         
     }
-    
-    func getAllRevies() {
-        APIManager.sharedInstance().getReviews { (success : Bool, data : AnyObject?, error : NSError?) -> () in
-            if success == true {
-                if let value = data as? [Review] {
-                    AppDataManager.sharedInstance().reviewsOfSytem = value
-                }
-            }else {
-                if let myError = error {
-                    Utils.showAlertWithMessage(myError.localizedDescription)
-                }else {
-                    Utils.showAlertWithMessage(StringContents.ErrorMessage.kUnexpectedError)
-                }
-            }
-        }
-    }
-    
     func setAllUser() {
         APIManager.sharedInstance().getUsers { (success : Bool, data :AnyObject?, error : NSError?) -> () in
             if success == true {

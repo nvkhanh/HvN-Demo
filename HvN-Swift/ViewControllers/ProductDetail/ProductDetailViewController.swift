@@ -19,8 +19,6 @@ class ProductDetailViewController: BaseViewController, UITableViewDelegate, UITa
     
     var datasources = [Review]()
     var users = [User]()
-    var allReviews = [Review]()
-    var reviews = [Review]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -80,7 +78,7 @@ class ProductDetailViewController: BaseViewController, UITableViewDelegate, UITa
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("ReviewTableViewCell", forIndexPath: indexPath) as! ReviewTableViewCell
-        cell.fillUIWithReview(datasources[indexPath.row], users: AppDataManager.sharedInstance().users)
+        cell.fillUIWithReview(datasources[indexPath.row], users: users)
         return cell
     }
     

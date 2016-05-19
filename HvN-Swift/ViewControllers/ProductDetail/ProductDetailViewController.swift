@@ -27,6 +27,10 @@ class ProductDetailViewController: BaseViewController, UITableViewDelegate, UITa
         
         self.setUpUI()
         self.getReviewDatasources()
+        
+        if let systemUsers = AppDataManager.sharedInstance().users {
+            self.users = systemUsers
+        }
     }
     
     func setUpUI() {
@@ -37,16 +41,29 @@ class ProductDetailViewController: BaseViewController, UITableViewDelegate, UITa
             productDescriptionLabel.text = product.productDecription
             self.title =  product.productName
         }
-        
     }
     
     func updateReviewDatasources() {
-        for review in datasources {
+        if self.users.count  != 0 {
+            self.updateUserNameForEachReview()
+
+        }else {
+            AppDataManager.sharedInstance().getAllUser({ (success, data, error) in
+                if let array = data as? [User] {
+                    self.users = array
+                    self.updateUserNameForEachReview()
+                    self.tableView.reloadData()
+                }
+            })
+        }
+        self.totalReviewsLabel.text = String(format: "Reviews (%d)", datasources.count)
+    }
+    func updateUserNameForEachReview() {
+        for review in self.datasources {
             if let index = users.indexOf({$0.userId == review.userId}){
                 review.userName = users[index].userName
             }
         }
-        self.totalReviewsLabel.text = String(format: "Reviews (%d)", datasources.count)
     }
     
     func getReviewDatasources() {

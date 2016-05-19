@@ -23,7 +23,7 @@ class SuggestionViewController: BaseViewController , UITableViewDataSource, UITa
         super.viewDidLoad()
         
         self.getAllBrands()
-        self.setAllUser()
+        self.getAllUsers()
         self.title = "Brand List"
     }
     
@@ -34,7 +34,6 @@ class SuggestionViewController: BaseViewController , UITableViewDataSource, UITa
             if success == true {
                 if let array = data as? [Brand] {
                     self.datasources = array
-                    AppDataManager.sharedInstance().brands = array
                 }
             }else {
                 if let myError = error {
@@ -48,20 +47,10 @@ class SuggestionViewController: BaseViewController , UITableViewDataSource, UITa
         }
         
     }
-    func setAllUser() {
-        APIManager.sharedInstance().getUsers { (success : Bool, data :AnyObject?, error : NSError?) -> () in
-            if success == true {
-                if let allUsers = data as? [User] {
-                    self.users = allUsers
-                    AppDataManager.sharedInstance().users = allUsers
-                }
-            }else {
-                if let myError = error {
-                    Utils.showAlertWithMessage(myError.localizedDescription)
-                }else {
-                    Utils.showAlertWithMessage(StringContents.ErrorMessage.kUnexpectedError)
-                }
-            }
+    
+    func getAllUsers() {
+        AppDataManager.sharedInstance().getAllUser { (success, data, error) in
+            
         }
     }
     

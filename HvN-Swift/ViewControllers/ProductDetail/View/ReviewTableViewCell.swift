@@ -44,7 +44,6 @@ class ReviewTableViewCell: UITableViewCell {
             ratingView.rating = Double(review.rating.doubleValue)
         }
         
-        
     }
     
     class func getHeightWithComment(comment : NSString) -> CGFloat {

@@ -150,7 +150,7 @@ class AddReviewViewController: BaseViewController, ZBarReaderDelegate, MLPAutoCo
         }
         
         if let viewController =  productDetailViewController {
-            viewController.updateReviewDatasources()
+            viewController.getReviewDatasources()
             self.navigationController?.popToViewController(viewController, animated: true)
         }else {
             self.navigationController?.popToRootViewControllerAnimated(true)
@@ -160,7 +160,7 @@ class AddReviewViewController: BaseViewController, ZBarReaderDelegate, MLPAutoCo
     func findSystemUsers(completion : CommonBlock) {
         if self.users.count == 0 {
             self.showLoading()
-            APIManager.sharedInstance().getUsers({ (success, data, error) in
+            AppDataManager.sharedInstance().getAllUser({ (success, data, error) in
                 self.hideLoading()
                 if success == true {
                     if let array = data as? [User] {

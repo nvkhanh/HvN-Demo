@@ -11,8 +11,6 @@ import UIKit
 class AppDataManager: NSObject {
     
     var users  : [User]?
-    var brands : [Brand]?
-    var reviewsOfSytem : [Review]?
     
     class func sharedInstance() -> AppDataManager {
         struct Static {
@@ -20,6 +18,18 @@ class AppDataManager: NSObject {
         }
         return Static.instance
     }
-    
+    func getAllUser(completion : CompletionBlock) {
+        APIManager.sharedInstance().getUsers { (success : Bool, data :AnyObject?, error : NSError?) -> () in
+            if success == true {
+                if let allUsers = data as? [User] {
+                    self.users = allUsers
+                    AppDataManager.sharedInstance().users = allUsers
+                    completion(success: true, data: allUsers, error: nil)
+                }
+            }else {
+                completion(success: false, data: nil, error: error)
+            }
+        }
+    }
 
 }

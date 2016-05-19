@@ -131,13 +131,8 @@ class AddReviewViewController: BaseViewController, ZBarReaderDelegate, MLPAutoCo
     
     func cacheLocalReview(review : Review) {
         let navigationController = self.navigationController
+        
         if let array = navigationController?.viewControllers {
-            for value in array {
-                if let viewController = value as? ProductsViewController {
-                    viewController.localReview.append(review)
-                    break
-                }
-            }
             for value in array {
                 if let viewController = value as? ProductDetailViewController {
                     viewController.localReview.append(review)
@@ -152,6 +147,7 @@ class AddReviewViewController: BaseViewController, ZBarReaderDelegate, MLPAutoCo
     func handlerAddReviewSuccess(productId : String) {
         let navigationController = self.navigationController
         var productDetailViewController : ProductDetailViewController?
+        
         if let array = navigationController?.viewControllers {
             for value in array {
                 if let viewController = value as? ProductDetailViewController {
@@ -164,6 +160,7 @@ class AddReviewViewController: BaseViewController, ZBarReaderDelegate, MLPAutoCo
                 }
             }
         }
+        
         if let viewController =  productDetailViewController {
             self.navigationController?.popToViewController(viewController, animated: true)
         }else {

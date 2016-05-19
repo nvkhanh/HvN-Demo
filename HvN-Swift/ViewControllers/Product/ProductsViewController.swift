@@ -45,7 +45,6 @@ class ProductsViewController: BaseViewController, UITableViewDelegate, UITableVi
         if let productDetailViewController = Utils.loadViewController("ProductDetailViewController", storyBoard: "Main") as? ProductDetailViewController {
             productDetailViewController.product = datasource[indexPath.row]
             productDetailViewController.allReviews = self.reviews
-            productDetailViewController.localReview = localReview
             productDetailViewController.users = self.users
             self.navigationController?.pushViewController(productDetailViewController, animated: true)
         }

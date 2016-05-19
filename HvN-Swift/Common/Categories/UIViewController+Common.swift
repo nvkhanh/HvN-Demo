@@ -18,6 +18,7 @@ extension UIViewController {
         return viewController
         
     }
+    
     func showLoading() {
         let viewController = self.rootView()
         if viewController != nil {
@@ -25,13 +26,12 @@ extension UIViewController {
             loadingNotification.mode = MBProgressHUDMode.Indeterminate
             loadingNotification.labelText = "Loading"
         }
-        
     }
+    
     func hideLoading() {
         let viewController = self.rootView()
         if viewController != nil {
             MBProgressHUD.hideAllHUDsForView(viewController!.view, animated: true)
         }
-        
     }
 }

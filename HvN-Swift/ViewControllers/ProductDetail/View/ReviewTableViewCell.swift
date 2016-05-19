@@ -18,6 +18,8 @@ class ReviewTableViewCell: UITableViewCell {
     @IBOutlet weak var containerView : UIView!
 
     var review : Review?
+    
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -29,6 +31,7 @@ class ReviewTableViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
         // Configure the view for the selected state
     }
+    
     func fillUIWithReview(review : Review, users : [User]) {
         self.review = review
         if let review = self.review {
@@ -46,6 +49,7 @@ class ReviewTableViewCell: UITableViewCell {
         
         
     }
+    
     class func getHeightWithComment(comment : NSString) -> CGFloat {
         let titleAttributes =  [NSFontAttributeName : UIFont.systemFontOfSize(14)]
         let maxWidth = Utils.getScreenSize().width - 16 - 16

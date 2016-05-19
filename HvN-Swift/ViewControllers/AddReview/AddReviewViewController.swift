@@ -20,6 +20,7 @@ extension ZBarSymbolSet: SequenceType {
 }
 
 class AddReviewViewController: BaseViewController, ZBarReaderDelegate, MLPAutoCompleteTextFieldDataSource, MLPAutoCompleteTextFieldDelegate, UITextFieldDelegate {
+    
     var ZBarReader: ZBarReaderViewController?
     @IBOutlet weak var productIdTextField : UITextField!
     @IBOutlet weak var emailTextField : UITextField!
@@ -36,37 +37,41 @@ class AddReviewViewController: BaseViewController, ZBarReaderDelegate, MLPAutoCo
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         if let product = self.product {
             productIdTextField.text = product.productId
             productIdTextField.enabled = false
             self.productNameLabel.text = product.productName
         }
+        
         self.initDataIfNeed()
         self.navigationItem.rightBarButtonItem = nil
         ratingLabel.text = "Rating: 1"
         self.title = "Add Review"
         ratingView.didTouchCosmos = didTouchCosmos
-    
     }
-    
-  
+
     override func viewWillDisappear(animated : Bool){
         super.viewWillDisappear(animated)
         userTouchedOnBackButton = true
     }
+    
     override func viewDidDisappear(animated : Bool){
         super.viewDidDisappear(animated)
     }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
     @IBAction func didTouchedOnAddReViewButton() {
         self.view.endEditing(true)
+        
         let message = self.validate()
         if message.lengthOfBytesUsingEncoding(NSUTF8StringEncoding) == 0 {
             
-            let user = self.findMatchedUserByEmail(emailTextField.text!)
+            let user = self.findMatchedUser(emailTextField.text!)
             if  user == nil {
                 Utils.showAlertWithMessage(StringContents.MessageValidate.kUserNotFound)
             }else {
@@ -88,6 +93,7 @@ class AddReviewViewController: BaseViewController, ZBarReaderDelegate, MLPAutoCo
             Utils.showAlertWithMessage(message)
         }
     }
+    
     @IBAction func didTouchedOnScanBarCodeButton() {
         if (self.ZBarReader == nil) {
             self.ZBarReader = ZBarReaderViewController()
@@ -99,12 +105,14 @@ class AddReviewViewController: BaseViewController, ZBarReaderDelegate, MLPAutoCo
         self.ZBarReader?.showsZBarControls = false
         navigationController?.pushViewController(self.ZBarReader!, animated:true)
     }
+    
     //MARK: -- TextField Delegate
     func textFieldDidEndEditing(textField: UITextField) {
         if textField == self.productIdTextField && userTouchedOnBackButton == false{
             self.updateMatchedProduct(self.productIdTextField.text!)
         }
     }
+    
     //MARK: -- AutoComplete TextField
     func autoCompleteTextField(textField: MLPAutoCompleteTextField!, possibleCompletionsForString string: String!) -> [AnyObject]! {
         var result = [String]()
@@ -116,6 +124,7 @@ class AddReviewViewController: BaseViewController, ZBarReaderDelegate, MLPAutoCo
         return result
         
     }
+    
     //MARK: -- Private Methods
     func initDataIfNeed() {
         self.showLoading()
@@ -125,6 +134,7 @@ class AddReviewViewController: BaseViewController, ZBarReaderDelegate, MLPAutoCo
             })
         }
     }
+    
     func cacheLocalReview(review : Review) {
         let navigationController = self.navigationController
         if let array : [UIViewController] = (navigationController?.viewControllers) {
@@ -142,6 +152,7 @@ class AddReviewViewController: BaseViewController, ZBarReaderDelegate, MLPAutoCo
             }
         }
     }
+    
     func handlerAddReviewSuccess(productId : String) {
         let navigationController = self.navigationController
         var productDetailViewController : ProductDetailViewController?
@@ -162,6 +173,7 @@ class AddReviewViewController: BaseViewController, ZBarReaderDelegate, MLPAutoCo
             self.navigationController?.popToRootViewControllerAnimated(true)
         }
     }
+    
     func findSystemUsers(completion : CommonBlock) {
         if self.users.count == 0 {
             self.showLoading()
@@ -184,6 +196,7 @@ class AddReviewViewController: BaseViewController, ZBarReaderDelegate, MLPAutoCo
             completion()
         }
     }
+    
     func findSystemProducts(completion : CommonBlock) {
         if self.products.count == 0 {
             self.showLoading()
@@ -207,6 +220,7 @@ class AddReviewViewController: BaseViewController, ZBarReaderDelegate, MLPAutoCo
             completion()
         }
     }
+    
     func updateMatchedProduct(productId : String) {
         var found = false
         for value in products {
@@ -222,6 +236,7 @@ class AddReviewViewController: BaseViewController, ZBarReaderDelegate, MLPAutoCo
             
         }
     }
+    
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
         let results: NSFastEnumeration = info[ZBarReaderControllerResults] as! NSFastEnumeration
         var symbolFound : ZBarSymbol?
@@ -229,6 +244,7 @@ class AddReviewViewController: BaseViewController, ZBarReaderDelegate, MLPAutoCo
             symbolFound = symbol as? ZBarSymbol
             break
         }
+        
         if let symbol = symbolFound {
             let resultString = NSString(string: symbol.data)
             self.productIdTextField.text = resultString as String;
@@ -240,6 +256,7 @@ class AddReviewViewController: BaseViewController, ZBarReaderDelegate, MLPAutoCo
         }
         
     }
+    
     func validate() -> String {
         var message = ""
         if self.productIdTextField.text!.lengthOfBytesUsingEncoding(NSUTF8StringEncoding) == 0 {
@@ -249,9 +266,11 @@ class AddReviewViewController: BaseViewController, ZBarReaderDelegate, MLPAutoCo
         }else if self.commentTextView.text!.lengthOfBytesUsingEncoding(NSUTF8StringEncoding) == 0 {
             message = StringContents.MessageValidate.kMissingComment
         }
+        
         return message
     }
-    func findMatchedUserByEmail(email : String) -> User? {
+    
+    func findMatchedUser(email : String) -> User? {
         for value in users {
             if value.email.lowercaseString.rangeOfString(emailTextField.text!.lowercaseString) != nil{
                 return value
@@ -259,6 +278,7 @@ class AddReviewViewController: BaseViewController, ZBarReaderDelegate, MLPAutoCo
         }
         return nil
     }
+    
     private func didTouchCosmos(rating: Double) {
         self.rating = CGFloat(rating)
         self.ratingLabel.text = String(format: "Rating: %.1f",rating)

@@ -47,9 +47,14 @@ class ProductDetailViewController: BaseViewController, UITableViewDelegate, UITa
         }
         
     }
+    
     func filterReviewDatasources() {
+        for review in localReview {
+            datasources.insert(review, atIndex: 0)
+        }
         self.totalReviewsLabel.text = String(format: "Reviews (%d)", datasources.count)
     }
+    
     func initData() {
         if let product = self.product {
             self.showLoading()
@@ -72,14 +77,17 @@ class ProductDetailViewController: BaseViewController, UITableViewDelegate, UITa
         
         }
     }
+    
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         return ReviewTableViewCell.getHeightWithComment(datasources[indexPath.row].comment)
     }
+    
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("ReviewTableViewCell", forIndexPath: indexPath) as! ReviewTableViewCell
         cell.fillUIWithReview(datasources[indexPath.row], users: users)
         return cell
     }
+    
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return datasources.count
     }

@@ -34,16 +34,18 @@ class ProductsViewController: BaseViewController, UITableViewDelegate, UITableVi
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    //MARK: -- TableView Method
     
+    //MARK: -- TableView Method
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("ProductTableViewCell", forIndexPath: indexPath) as! ProductTableViewCell
         cell.reloadViewWithData(datasource[indexPath.row], reviews: reviews, brands: brands)
         return cell
     }
+    
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return datasource.count
     }
+    
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         if let productDetailViewController = Utils.loadViewController("ProductDetailViewController", storyBoard: "Main") as? ProductDetailViewController {
             productDetailViewController.product = datasource[indexPath.row]
@@ -59,6 +61,7 @@ class ProductsViewController: BaseViewController, UITableViewDelegate, UITableVi
         self.title = "Product List"
         
     }
+    
     func initData() {
         self.showLoading()
         APIManager.sharedInstance().getProducts { (success : Bool, data : AnyObject?, error : NSError?) -> () in
@@ -127,12 +130,14 @@ class ProductsViewController: BaseViewController, UITableViewDelegate, UITableVi
             self.reloadDataIfNeed()
         }
     }
+    
     func reloadDataIfNeed() {
         if totalPendingRequest == 0 {
             tableView.reloadData()
             self.hideLoading()
         }
     }
+    
     func filterDatasourceBySelectedBrand() {
         var result = [Product]()
         for value in datasource {
@@ -143,6 +148,5 @@ class ProductsViewController: BaseViewController, UITableViewDelegate, UITableVi
             }
         }
         self.datasource = result
-        
     }
 }

@@ -10,6 +10,7 @@
 import UIKit
 
 class StringContents: NSObject {
+    
     struct MessageValidate {
         static let kMissingProductId = "Missing product id"
         static let kInValidEmail = "The email isn't valid"
@@ -17,6 +18,7 @@ class StringContents: NSObject {
         static let kProductNotFound = "No product found"
         static let kMissingComment = "Missing comment"
     }
+    
     struct ErrorMessage {
         static let kUnexpectedError = "UnExpected Error..."
     }

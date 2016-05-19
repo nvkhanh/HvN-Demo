@@ -24,8 +24,6 @@ class Review: BaseModel {
         productId <- map["productID.objectId"]
         rating <- map["rating"]
         userId <- map["userID.objectId"]
-        
-        
         updatedAt <- (map["updatedAt"],CustomDateTransform())
     }
     
@@ -34,6 +32,7 @@ class Review: BaseModel {
         return object!
         
     }
+    
     override class func getListFromArrary(array : [AnyObject]) -> [AnyObject] {
         var result  = [Review]()
         for value in array {
@@ -57,8 +56,6 @@ class Review: BaseModel {
                 return false
             }
         })
-        
-        
         return result
     }
     
@@ -70,7 +67,9 @@ class Review: BaseModel {
                     break
                 }
             }
-            
+        }
+        if self.userName == nil {
+            self.userName = "Anonymous"
         }
     }
     

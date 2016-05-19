@@ -20,6 +20,7 @@ class Product: BaseModel {
     var brandName : String?
     var rating : NSNumber?
     
+    
     override func mapping(map: Map) {
         productId <- map["objectId"]
         productDecription <- map["description"]
@@ -27,7 +28,6 @@ class Product: BaseModel {
         avaibilityStatus <- map["availabilityStatus"]
         brandId <- map["brandID.objectId"]
         dateCreate <- (map["dateCreated.iso"],CustomDateTransform())
-        
     }
     
     override class func objectFromDictionary(dict: NSDictionary) -> AnyObject {
@@ -35,6 +35,7 @@ class Product: BaseModel {
         return object!
         
     }
+    
     override class func getListFromArrary(array : [AnyObject]) -> [AnyObject] {
         var result  = [Product]()
         for value in array {
@@ -57,6 +58,7 @@ class Product: BaseModel {
         
         return result
     }
+    
     func updateBrandName(brands : [Brand]) {
         if self.brandName == nil {
             for value in brands {
@@ -65,9 +67,9 @@ class Product: BaseModel {
                     break
                 }
             }
-            
         }
     }
+    
     func updateRatingWithReviews(reviews : [Review]) {
         if self.rating == nil {
             var count = Float(0)

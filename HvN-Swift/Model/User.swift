@@ -22,11 +22,10 @@ class User: BaseModel {
     }
     
     override class func objectFromDictionary(dict: NSDictionary) -> AnyObject {
-        
         let object = Mapper<User>().map(dict)
         return object!
-        
     }
+    
     override class func getListFromArrary(array : [AnyObject]) -> [AnyObject] {
         var result  = [User]()
         for value in array {
@@ -34,8 +33,6 @@ class User: BaseModel {
                 result.append(User.objectFromDictionary(dict) as! User)
             }
         }
-        
-        
         return result
     }
     

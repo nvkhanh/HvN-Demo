@@ -11,7 +11,6 @@ import UIKit
 class BrandService: BaseService {
     
     func getBrands(completion : CompletionBlock)  {
-        
         self.callAPI(Constants.URL.kGetAllBrands, params: nil, method: Constants.Method.kGETMethod) { (success : Bool, responseObject : AnyObject?, error : NSError?) in
             if success {
                 if let jsonResult = responseObject as? Dictionary<String, AnyObject> {
@@ -30,7 +29,6 @@ class BrandService: BaseService {
                 completion(success: false , data: nil, error: error)
             }
         }
-        
     }
 
     

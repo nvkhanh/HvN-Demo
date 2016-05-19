@@ -17,13 +17,13 @@ class Brand: BaseModel {
         brandDescription <- map["description"]
         brandId <- map["objectId"]
         brandName <- map["name"]
-        
     }
+    
     override class func objectFromDictionary(dict: NSDictionary) -> AnyObject {
         let object = Mapper<Brand>().map(dict)
         return object!
-        
     }
+    
     override class func getListFromArrary(array : [AnyObject]) -> [AnyObject] {
         var result  = [Brand]()
         for value in array {

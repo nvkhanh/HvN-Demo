@@ -11,7 +11,6 @@ import UIKit
 class ProductService: BaseService {
     
     func getProducts(completion : CompletionBlock)  {
-        
         self.callAPI(Constants.URL.kGetAllProducts, params: nil, method: Constants.Method.kGETMethod) { (success : Bool, responseObject : AnyObject?, error : NSError?) in
             if success {
                 if let jsonResult = responseObject as? Dictionary<String, AnyObject> {
@@ -29,7 +28,6 @@ class ProductService: BaseService {
                 completion(success: false , data: nil, error: error)
             }
         }
-        
     }
 
 }

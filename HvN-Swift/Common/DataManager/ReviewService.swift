@@ -9,8 +9,8 @@
 import UIKit
 
 class ReviewService: BaseService {
+    
     func getReviews(completion : CompletionBlock)  {
-        
         self.callAPI(Constants.URL.kGetAllReviews, params: nil, method: Constants.Method.kGETMethod) { (success : Bool, responseObject : AnyObject?, error : NSError?) in
             if success {
                 if let jsonResult = responseObject as? Dictionary<String, AnyObject> {
@@ -28,7 +28,6 @@ class ReviewService: BaseService {
                 completion(success: false , data: nil, error: error)
             }
         }
-        
     }
     
     func addReviews(comment: String, rating : NSNumber,  productId : String, userId : String, completion : CompletionBlock)  {
@@ -57,7 +56,6 @@ class ReviewService: BaseService {
     }
     
     func getReviewOfProduct(productId : String, completion : CompletionBlock) {
-        
         let dict = ["productID" : ["$inQuery" :["where" : ["objectId" :productId],"className": "Product"]]];
         var queryUrl = Constants.URL.kPostReview
         queryUrl += "?where="
@@ -86,7 +84,6 @@ class ReviewService: BaseService {
         }else {
             completion(success: false, data: nil, error: NSError(domain: "", code: Constants.Config.kDefaultErrorCode, userInfo: nil))
         }
-        
     }
     
 

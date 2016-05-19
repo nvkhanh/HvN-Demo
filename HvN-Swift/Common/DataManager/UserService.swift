@@ -9,8 +9,8 @@
 import UIKit
 
 class UserService: BaseService {
+    
     func getUsers(completion : CompletionBlock)  {
-        
         self.callAPI(Constants.URL.kGetAllUsers, params: nil, method: Constants.Method.kGETMethod) { (success : Bool, responseObject : AnyObject?, error : NSError?) in
             if success {
                 if let jsonResult = responseObject as? Dictionary<String, AnyObject> {
@@ -28,7 +28,6 @@ class UserService: BaseService {
                 completion(success: false , data: nil, error: error)
             }
         }
-        
     }
 
 }

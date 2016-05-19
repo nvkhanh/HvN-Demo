@@ -30,18 +30,23 @@ class APIManager: NSObject {
     func getBrands(completion : CompletionBlock) {
         APIManager.sharedInstance().brandService.getBrands(completion)
     }
+    
     func getUsers(completion : CompletionBlock)  {
         APIManager.sharedInstance().userService.getUsers(completion)
     }
+    
     func getReviews(completion : CompletionBlock)  {
         APIManager.sharedInstance().reviewService.getReviews(completion)
     }
+    
     func getProducts(completion : CompletionBlock)  {
         APIManager.sharedInstance().productService.getProducts(completion)
     }
+    
     func addReviews(comment: String, rating : NSNumber,  productId : String, userId : String, completion : CompletionBlock)  {
         APIManager.sharedInstance().reviewService.addReviews(comment, rating: rating, productId: productId, userId: userId, completion: completion)
     }
+    
     func getReviewOfProduct(productId : String, completion : CompletionBlock) {
         APIManager.sharedInstance().reviewService.getReviewOfProduct(productId, completion: completion)
     }

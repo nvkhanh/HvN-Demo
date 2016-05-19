@@ -23,10 +23,11 @@ class BaseViewController: UIViewController {
     }
     
     func createRightBarButtonWithTitle(title : String){
-        let barButton = UIBarButtonItem(title: title, style: UIBarButtonItemStyle.Plain, target: self, action: #selector(BaseViewController.didTouchedOnRightBarButton))
+        let barButton = UIBarButtonItem(title: title, style: UIBarButtonItemStyle.Plain, target: self, action: #selector(didTouchedOnRightBarButton))
         self.navigationItem.rightBarButtonItem = barButton
         
     }
+    
     func didTouchedOnRightBarButton() {
         if let viewController = Utils.loadViewController("AddReviewViewController", storyBoard: "Main") as? AddReviewViewController {
             if let productDetailViewController = self as? ProductDetailViewController {

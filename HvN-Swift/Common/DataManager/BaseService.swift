@@ -9,6 +9,7 @@
 import UIKit
 import AFNetworking
 class BaseService: NSObject {
+    
     func callAPI(url: String, params : NSDictionary?, method : String, completion : CompletionBlock) -> () {
         let url = NSURL(string: url)
         let currentTime = NSTimeInterval(Constants.Config.kDefaultTimeOut)

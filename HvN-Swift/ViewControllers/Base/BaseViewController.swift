@@ -29,9 +29,6 @@ class BaseViewController: UIViewController {
                 viewController.product = productDetailViewController.product
                 viewController.users = productDetailViewController.users
             }
-            if let productViewController = self as? ProductsViewController {
-                viewController.products = productViewController.allProducts
-            }
             self.navigationController?.pushViewController(viewController, animated: true)
         }
     }

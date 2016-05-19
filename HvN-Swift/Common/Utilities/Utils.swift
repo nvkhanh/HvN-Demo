@@ -16,7 +16,7 @@ class Utils: NSObject {
         
         if let date = dateFormat.dateFromString(string as String) {
             return date;
-        }else {
+        } else {
             return nil
         }
     }

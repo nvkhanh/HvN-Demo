@@ -33,6 +33,7 @@ class ProductDetailViewController: BaseViewController, UITableViewDelegate, UITa
         }
     }
     
+    //MARK: -- Private Methods
     func setUpUI() {
         
         if let product = self.product {
@@ -47,7 +48,7 @@ class ProductDetailViewController: BaseViewController, UITableViewDelegate, UITa
         if self.users.count  != 0 {
             self.updateUserNameForEachReview()
 
-        }else {
+        } else {
             AppDataManager.sharedInstance().getAllUser({ (success, data, error) in
                 if let array = data as? [User] {
                     self.users = array
@@ -80,7 +81,7 @@ class ProductDetailViewController: BaseViewController, UITableViewDelegate, UITa
                 } else {
                     if let myError = error {
                         Utils.showAlertWithMessage(myError.localizedDescription)
-                    }else {
+                    } else {
                         Utils.showAlertWithMessage(StringContents.ErrorMessage.kUnexpectedError)
                     }
                 }

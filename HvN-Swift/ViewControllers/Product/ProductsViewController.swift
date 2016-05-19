@@ -11,18 +11,13 @@ import UIKit
 
 class ProductsViewController: BaseViewController, UITableViewDelegate, UITableViewDataSource {
     
-    var allProducts = [Product]()
     private var datasource = [Product]()
-    var brands = [Brand]()
     var selectedBrand : Brand?
     @IBOutlet weak var tableView : UITableView!
-    private var totalPendingRequest = 1
-    private var filterMode = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Do any additional setup after loading the view.
         self.initData()
         self.setUpUI()
     }
@@ -57,17 +52,16 @@ class ProductsViewController: BaseViewController, UITableViewDelegate, UITableVi
         if let brand = selectedBrand {
             self.showLoading()
             APIManager.sharedInstance().getProductsByBrand(brand) { (success, data, error) in
-                self.totalPendingRequest -= 1
                 self.hideLoading()
                 if success == true {
                     if let value = data as? [Product] {
                         self.datasource = value
                         self.tableView.reloadData()
                     }
-                }else {
+                } else {
                     if let myError = error {
                         Utils.showAlertWithMessage(myError.localizedDescription)
-                    }else {
+                    } else {
                         Utils.showAlertWithMessage(StringContents.ErrorMessage.kUnexpectedError)
                     }
                     

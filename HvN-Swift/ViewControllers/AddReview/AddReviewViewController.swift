@@ -78,13 +78,13 @@ class AddReviewViewController: BaseViewController, ZBarReaderDelegate, MLPAutoCo
                             self.cacheLocalReview(review)
                         }
                         self.handlerAddReviewSuccess(self.productIdTextField.text!)
-                    }else {
+                    } else {
                         Utils.showAlertWithMessage(error!.localizedDescription)
                     }
                 }
             }
             
-        }else {
+        } else {
             Utils.showAlertWithMessage(message)
         }
     }
@@ -152,7 +152,7 @@ class AddReviewViewController: BaseViewController, ZBarReaderDelegate, MLPAutoCo
         if let viewController =  productDetailViewController {
             viewController.getReviewDatasources()
             self.navigationController?.popToViewController(viewController, animated: true)
-        }else {
+        } else {
             self.navigationController?.popToRootViewControllerAnimated(true)
         }
     }
@@ -166,16 +166,16 @@ class AddReviewViewController: BaseViewController, ZBarReaderDelegate, MLPAutoCo
                     if let array = data as? [User] {
                         self.users = array
                     }
-                }else {
+                } else {
                     if let myError = error {
                         Utils.showAlertWithMessage(myError.localizedDescription)
-                    }else {
+                    } else {
                         Utils.showAlertWithMessage(StringContents.ErrorMessage.kUnexpectedError)
                     }
                 }
                 completion()
             })
-        }else {
+        } else {
             completion()
         }
     }
@@ -189,17 +189,17 @@ class AddReviewViewController: BaseViewController, ZBarReaderDelegate, MLPAutoCo
                     if let value = data as? [Product] {
                         self.products = value
                     }
-                }else {
+                } else {
                     if let myError = error {
                         Utils.showAlertWithMessage(myError.localizedDescription)
-                    }else {
+                    } else {
                         Utils.showAlertWithMessage(StringContents.ErrorMessage.kUnexpectedError)
                     }
 
                 }
                 completion()
             }
-        }else {
+        } else {
             completion()
         }
     }
@@ -209,6 +209,7 @@ class AddReviewViewController: BaseViewController, ZBarReaderDelegate, MLPAutoCo
         for value in products where value.productId == productId{
             self.productNameLabel.text = value.productName
             found = true
+            break
         }
         if found == false {
             Utils.showAlertWithMessage(StringContents.MessageValidate.kProductNotFound)
@@ -241,9 +242,9 @@ class AddReviewViewController: BaseViewController, ZBarReaderDelegate, MLPAutoCo
         var message = ""
         if self.productIdTextField.text!.lengthOfBytesUsingEncoding(NSUTF8StringEncoding) == 0 {
             message = StringContents.MessageValidate.kMissingProductId
-        }else if self.emailTextField.text!.lengthOfBytesUsingEncoding(NSUTF8StringEncoding) == 0 {
+        } else if self.emailTextField.text!.lengthOfBytesUsingEncoding(NSUTF8StringEncoding) == 0 {
             message = StringContents.MessageValidate.kInValidEmail
-        }else if self.commentTextView.text!.lengthOfBytesUsingEncoding(NSUTF8StringEncoding) == 0 {
+        } else if self.commentTextView.text!.lengthOfBytesUsingEncoding(NSUTF8StringEncoding) == 0 {
             message = StringContents.MessageValidate.kMissingComment
         }
         

@@ -17,15 +17,15 @@ class BrandService: BaseService {
                     if let array = jsonResult["results"] as? [AnyObject] {
                         let result = Brand.getListFromArrary(array)
                         completion(success: true, data: result, error: nil)
-                    }else {
+                    } else {
                         completion(success: false, data: nil, error: NSError(domain: "", code: Constants.Config.kDefaultErrorCode, userInfo: nil))
                     }
                     
-                }else {
+                } else {
                     completion(success: false, data: nil, error: NSError(domain: "", code: Constants.Config.kDefaultErrorCode, userInfo: nil))
                 }
                 
-            }else {
+            } else {
                 completion(success: false , data: nil, error: error)
             }
         }

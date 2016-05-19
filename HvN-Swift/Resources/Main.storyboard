@@ -113,17 +113,8 @@
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="0.0" translatesAutoresizingMaskIntoConstraints="NO" id="vIp-lu-yVr">
-                                                    <rect key="frame" x="108" y="60" width="58" height="17"/>
-                                                    <string key="text" base64-UTF8="YES">
-EFJhdGluZzogMA
-</string>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qMe-c8-0eL" customClass="CosmosView" customModule="Cosmos">
-                                                    <rect key="frame" x="174" y="60" width="151" height="17"/>
+                                                    <rect key="frame" x="108" y="57" width="181" height="17"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="144" id="1Fc-1D-uOV"/>
                                                         <constraint firstAttribute="height" constant="17" id="THV-qr-mbR"/>
@@ -140,7 +131,7 @@ EFJhdGluZzogMA
                                                             <real key="value" value="0.10000000000000001"/>
                                                         </userDefinedRuntimeAttribute>
                                                         <userDefinedRuntimeAttribute type="number" keyPath="starSize">
-                                                            <real key="value" value="15"/>
+                                                            <real key="value" value="18"/>
                                                         </userDefinedRuntimeAttribute>
                                                     </userDefinedRuntimeAttributes>
                                                     <variation key="default">
@@ -151,21 +142,18 @@ EFJhdGluZzogMA
                                                 </view>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="vIp-lu-yVr" secondAttribute="trailing" constant="8" id="1YE-Za-b7U"/>
                                                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="9nL-qO-4p7" secondAttribute="trailing" constant="8" id="8KF-Mk-7eR"/>
                                                 <constraint firstAttribute="bottom" secondItem="idY-FJ-nqc" secondAttribute="bottom" id="8aa-v7-QBh"/>
-                                                <constraint firstItem="qMe-c8-0eL" firstAttribute="centerY" secondItem="vIp-lu-yVr" secondAttribute="centerY" id="Hj2-3W-ASp"/>
+                                                <constraint firstItem="qMe-c8-0eL" firstAttribute="leading" secondItem="P6d-Px-mAy" secondAttribute="leading" id="Dr8-hi-HKi"/>
                                                 <constraint firstItem="P6d-Px-mAy" firstAttribute="top" secondItem="9nL-qO-4p7" secondAttribute="bottom" constant="10" id="JJ5-gi-ujF"/>
                                                 <constraint firstItem="P6d-Px-mAy" firstAttribute="leading" secondItem="9nL-qO-4p7" secondAttribute="leading" id="MVs-Te-8bo"/>
                                                 <constraint firstItem="P6d-Px-mAy" firstAttribute="top" secondItem="9nL-qO-4p7" secondAttribute="top" constant="23" id="bl1-9w-I66"/>
-                                                <constraint firstItem="P6d-Px-mAy" firstAttribute="leading" secondItem="vIp-lu-yVr" secondAttribute="leading" id="d9n-ti-F37"/>
-                                                <constraint firstItem="vIp-lu-yVr" firstAttribute="top" secondItem="P6d-Px-mAy" secondAttribute="bottom" constant="8" id="fFd-JP-2Cp"/>
+                                                <constraint firstItem="qMe-c8-0eL" firstAttribute="top" secondItem="P6d-Px-mAy" secondAttribute="bottom" constant="5" id="eHG-ez-56w"/>
                                                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="P6d-Px-mAy" secondAttribute="trailing" constant="8" id="idW-my-oEF"/>
                                                 <constraint firstItem="idY-FJ-nqc" firstAttribute="top" secondItem="rmo-oM-J3i" secondAttribute="top" id="nRv-LN-JTk"/>
                                                 <constraint firstItem="idY-FJ-nqc" firstAttribute="leading" secondItem="rmo-oM-J3i" secondAttribute="leading" id="plW-kJ-kjg"/>
                                                 <constraint firstItem="9nL-qO-4p7" firstAttribute="leading" secondItem="idY-FJ-nqc" secondAttribute="trailing" constant="8" id="qUd-Th-byD"/>
                                                 <constraint firstItem="9nL-qO-4p7" firstAttribute="top" secondItem="rmo-oM-J3i" secondAttribute="top" constant="8" id="sUV-Iy-qSu"/>
-                                                <constraint firstItem="qMe-c8-0eL" firstAttribute="leading" secondItem="vIp-lu-yVr" secondAttribute="trailing" constant="8" id="x7x-lb-e9k"/>
                                             </constraints>
                                             <variation key="default">
                                                 <mask key="constraints">
@@ -176,7 +164,6 @@ EFJhdGluZzogMA
                                         <connections>
                                             <outlet property="brandLabel" destination="P6d-Px-mAy" id="f0w-Jx-43I"/>
                                             <outlet property="productNameLabel" destination="9nL-qO-4p7" id="tYc-8e-dNK"/>
-                                            <outlet property="ratingLabel" destination="vIp-lu-yVr" id="iVS-EP-YhW"/>
                                             <outlet property="ratingView" destination="qMe-c8-0eL" id="caR-wN-ysg"/>
                                         </connections>
                                     </tableViewCell>

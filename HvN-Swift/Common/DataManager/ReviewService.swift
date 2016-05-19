@@ -17,14 +17,14 @@ class ReviewService: BaseService {
                     if let array = jsonResult["results"] as? [AnyObject] {
                         let result = Review.getListFromArrary(array)
                         completion(success: true, data: result, error: nil)
-                    }else {
+                    } else {
                         completion(success: false, data: nil, error: NSError(domain: "", code: Constants.Config.kDefaultErrorCode, userInfo: nil))
                     }
                     
-                }else {
+                } else {
                     completion(success: false, data: nil, error: NSError(domain: "", code: Constants.Config.kDefaultErrorCode, userInfo: nil))
                 }
-            }else {
+            } else {
                 completion(success: false , data: nil, error: error)
             }
         }
@@ -45,10 +45,10 @@ class ReviewService: BaseService {
                     dictReview.setValue(userDict, forKey: "userID")
                     dictReview.setValue(comment, forKey: "comment")
                     completion(success: true , data: Review.objectFromDictionary(dictReview), error: nil)
-                }else {
+                } else {
                     completion(success: false , data: nil, error: NSError(domain: "", code: Constants.Config.kDefaultErrorCode, userInfo: nil))
                 }
-            }else {
+            } else {
                 completion(success: false , data: nil, error: error)
             }
         }
@@ -69,19 +69,19 @@ class ReviewService: BaseService {
                         if let array = jsonResult["results"] as? [AnyObject] {
                             let result = Review.getListFromArrary(array)
                             completion(success: true, data: result, error: nil)
-                        }else {
+                        } else {
                             completion(success: false, data: nil, error: NSError(domain: "", code: Constants.Config.kDefaultErrorCode, userInfo: nil))
                         }
                         
-                    }else {
+                    } else {
                         completion(success: false, data: nil, error: NSError(domain: "", code: Constants.Config.kDefaultErrorCode, userInfo: nil))
                     }
-                }else {
+                } else {
                     completion(success: false , data: nil, error: error)
                 }
             }
             
-        }else {
+        } else {
             completion(success: false, data: nil, error: NSError(domain: "", code: Constants.Config.kDefaultErrorCode, userInfo: nil))
         }
     }

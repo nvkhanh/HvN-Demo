@@ -23,7 +23,7 @@ class SuggestionViewController: BaseViewController , UITableViewDataSource, UITa
         super.viewDidLoad()
         
         self.getAllBrands()
-        self.getAllUsers()
+        self.getAllUsersInBackground()
         self.title = "Brand List"
     }
     
@@ -35,10 +35,10 @@ class SuggestionViewController: BaseViewController , UITableViewDataSource, UITa
                 if let array = data as? [Brand] {
                     self.datasources = array
                 }
-            }else {
+            } else {
                 if let myError = error {
                     Utils.showAlertWithMessage(myError.localizedDescription)
-                }else {
+                } else {
                     Utils.showAlertWithMessage(StringContents.ErrorMessage.kUnexpectedError)
                 }
 
@@ -48,10 +48,8 @@ class SuggestionViewController: BaseViewController , UITableViewDataSource, UITa
         
     }
     
-    func getAllUsers() {
-        AppDataManager.sharedInstance().getAllUser { (success, data, error) in
-            
-        }
+    func getAllUsersInBackground() {
+        AppDataManager.sharedInstance().getAllUser(nil)
     }
     
     func findBrandWithText(text : String){
@@ -77,7 +75,6 @@ class SuggestionViewController: BaseViewController , UITableViewDataSource, UITa
         let brand = filterMode ? filterDatasources[indexPath.row] : datasources[indexPath.row]
         if let viewController = Utils.loadViewController("ProductsViewController", storyBoard: "Main") as? ProductsViewController {
             viewController.selectedBrand = brand
-            viewController.brands = self.datasources
             self.navigationController?.pushViewController(viewController, animated: true)
         }
         

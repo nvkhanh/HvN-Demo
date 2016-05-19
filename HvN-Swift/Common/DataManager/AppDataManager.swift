@@ -18,16 +18,20 @@ class AppDataManager: NSObject {
         }
         return Static.instance
     }
-    func getAllUser(completion : CompletionBlock) {
+    func getAllUser(completion : CompletionBlock?) {
         APIManager.sharedInstance().getUsers { (success : Bool, data :AnyObject?, error : NSError?) -> () in
             if success == true {
                 if let allUsers = data as? [User] {
                     self.users = allUsers
                     AppDataManager.sharedInstance().users = allUsers
-                    completion(success: true, data: allUsers, error: nil)
+                    if let block = completion {
+                        block(success: true, data: allUsers, error: nil)
+                    }
                 }
-            }else {
-                completion(success: false, data: nil, error: error)
+            } else {
+                if let block = completion {
+                    block(success: false, data: nil, error: error)
+                }
             }
         }
     }

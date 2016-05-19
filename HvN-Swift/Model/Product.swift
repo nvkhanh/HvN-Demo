@@ -70,16 +70,17 @@ class Product: BaseModel {
     func updateRatingWithReviews(reviews : [Review]) {
         if self.rating == nil {
             var count = Float(0)
-            var total = Float(0)
+            var total = Double(0)
             for value in reviews {
                 if value.productId == self.productId {
                     count += 1
-                    total += value.rating.floatValue
+                    total += value.rating.doubleValue
+                    print(value.rating.doubleValue)
                 }
             }
             if count  != 0 {
-                self.rating = NSNumber(float: total / count)
-            }else {
+                self.rating = NSNumber(float: Float(total) / count)
+            } else {
                 self.rating = nil
             }
         }

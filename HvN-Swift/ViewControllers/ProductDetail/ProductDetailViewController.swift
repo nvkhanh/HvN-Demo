@@ -21,7 +21,6 @@ class ProductDetailViewController: BaseViewController, UITableViewDelegate, UITa
     var users = [User]()
     var allReviews = [Review]()
     var reviews = [Review]()
-    var localReview = [Review]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,9 +43,6 @@ class ProductDetailViewController: BaseViewController, UITableViewDelegate, UITa
     }
     
     func filterReviewDatasources() {
-        for review in localReview {
-            datasources.insert(review, atIndex: 0)
-        }
         self.totalReviewsLabel.text = String(format: "Reviews (%d)", datasources.count)
     }
     
@@ -72,7 +68,7 @@ class ProductDetailViewController: BaseViewController, UITableViewDelegate, UITa
         
         }
     }
-    
+    //MARK: -- TableView Methods
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         return ReviewTableViewCell.getHeightWithComment(datasources[indexPath.row].comment)
     }

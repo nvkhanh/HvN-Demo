@@ -39,10 +39,10 @@ class ReviewTableViewCell: UITableViewCell {
             userNameLabel.text = review.userName
             
             commentLabel.text = review.comment
-            if review.updatedAt != nil {
-                ratingLabel.text =  Utils.convertDateToString(review.updatedAt!) +  "- Rating: " + review.rating.stringValue
+            if let createAt = review.createdAt {
+                ratingLabel.text = String(format: "%@ - Rating: %.1f", Utils.convertDateToString(createAt),review.rating.doubleValue)
             }else {
-                ratingLabel.text =  "Rating: " + review.rating.stringValue
+                ratingLabel.text =  String(format: "Rating: %.1f",review.rating.doubleValue)
             }
             ratingView.rating = Double(review.rating.doubleValue)
         }

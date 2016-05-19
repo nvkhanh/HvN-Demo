@@ -14,17 +14,16 @@ class Review: BaseModel {
     var userId = ""
     var productId = ""
     var rating = NSNumber(int: 0)
-    var updatedAt : NSDate?
+    var createdAt : NSDate?
     var userName : String?
     
     override func mapping(map: Map) {
         reviewId <- map["objectId"]
         comment <- map["comment"]
-        updatedAt <- map["updatedAt"]
         productId <- map["productID.objectId"]
         rating <- map["rating"]
         userId <- map["userID.objectId"]
-        updatedAt <- (map["updatedAt"],CustomDateTransform())
+        createdAt <- (map["createdAt"],CustomDateTransform())
     }
     
     override class func objectFromDictionary(dict: NSDictionary) -> AnyObject {
@@ -41,14 +40,14 @@ class Review: BaseModel {
             }
         }
         result.sortInPlace({ (object1, object2) -> Bool in
-            if object1.updatedAt == nil {
+            if object1.createdAt == nil {
                 return false
             }
-            if object2.updatedAt == nil {
+            if object2.createdAt == nil {
                 return true
             }
             
-            let compareResult = object1.updatedAt!.compare(object2.updatedAt!)
+            let compareResult = object1.createdAt!.compare(object2.createdAt!)
             if compareResult == NSComparisonResult.OrderedDescending {
                 return true
             }
@@ -64,6 +63,9 @@ class Review: BaseModel {
             for value in users {
                 if value.userId == self.userId {
                     self.userName = value.userName
+                    if userName?.lengthOfBytesUsingEncoding(NSUTF8StringEncoding) == 0 {
+                        userName = "Anonymous"
+                    }
                     break
                 }
             }

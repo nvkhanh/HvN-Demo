@@ -250,10 +250,10 @@
 			isa = PBXGroup;
 			children = (
 				D06DBAC51CEB181400718FF2 /* Base */,
-				D06DBAC21CEB181400718FF2 /* AddReview */,
-				D06DBAC71CEB181400718FF2 /* Brand */,
 				D06DBAC91CEB181400718FF2 /* Product */,
 				D06DBACD1CEB181400718FF2 /* ProductDetail */,
+				D06DBAC71CEB181400718FF2 /* Brand */,
+				D06DBAC21CEB181400718FF2 /* AddReview */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";

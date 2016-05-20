@@ -24,7 +24,6 @@ class AppDataManager: NSObject {
             if success == true {
                 if let allUsers = data as? [User] {
                     self.users = allUsers
-                    AppDataManager.sharedInstance().users = allUsers
                     if let block = completion {
                         block(success: true, data: allUsers, error: nil)
                     }

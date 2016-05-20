@@ -59,6 +59,7 @@ class ProductDetailViewController: BaseViewController, UITableViewDelegate, UITa
         }
         self.totalReviewsLabel.text = String(format: "Reviews (%d)", datasources.count)
     }
+    
     func updateUserNameForEachReview() {
         for review in self.datasources {
             if let index = users.indexOf({$0.userId == review.userId}){
